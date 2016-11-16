@@ -4,6 +4,7 @@ so you can start using GPS in your app quickly and easily. References to various
 be found in the code if you are interested (probably a good idea to have a look).
 
 Update your AndroidManifest.xml permissions:
+
 ```<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />```
 
 Initialize the GPS Wrapper class, add an observer and you got GPS. 
