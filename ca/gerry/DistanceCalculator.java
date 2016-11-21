@@ -6,28 +6,26 @@ import java.lang.*;
 
 public class DistanceCalculator
 {
-  private static final String TAG = "gerry.DC";
+  private static final String TAG = "ca.gerry.dc";
   private static final int TWO_MINUTES = 1000 * 60 * 2;
 
   private static int maxAge = 1000 * 60 * 30;
   private static double minDistance = 50.0;
   private static int accuracy = 250;
 
-  /*
+  /**
    * Update criteria used in method betterLocation.
-   * @param minAgeMs minimum diff in time between two values, used to prevent too-frequent updates
-   * @param maxAgeMs maximum diff in time between two values, used to insure a minimum frequency of updates
+   * @param maximumAgeMs maximum diff in time between two values, used to insure a minimum frequency of updates
    * @param accuracyMeters if accuracy is worse than this then the candidate location may be ignored
    * @param minDistanceMeters distance between the two values must be greater than this to be considered
    */
-  static public void updateBetterLocationCriteria(int maximumAgeMs, int accuracyMeters,
-                                                  double minDistanceMeters) {
+  static public void updateCriteria(int maximumAgeMs, int accuracyMeters, double minDistanceMeters) {
     maxAge = maximumAgeMs;
     minDistance = minDistanceMeters;
     accuracy = accuracyMeters;
   }
 
-  /*
+  /**
   * Determine if a newly reported location is 'better' than a previous value.
   * Better means a more accurate representation of the device's current position.
   * Based on https://developer.android.com/guide/topics/location/strategies.html
@@ -89,17 +87,17 @@ public class DistanceCalculator
                     b.getLatitude(), b.getLongitude(), b.getAltitude());
   }
 
-  /*
-   * Calculate distance between two points in latitude and longitude taking into account height difference. Uses Haversine method as its base.
-   * Based on http://stackoverflow.com/questions/3694380/calculating-distance-between-two-points-using-latitude-longitude-what-am-i-doi
+  /**
+   * Calculate distance between two points taking into account height difference.
+   * Uses Haversine method as its base.
    *
    * @param lat1
    * @param lon1
-   * @param el1 Start altitude in meters, use 0.0 to leave out this calculation
+   * @param el1 start altitude in meters, use 0.0 to leave out this calculation
    * @param lat2
    * @param lon2
-   * @param el2 End altitude in meters, use 0.0 to leave out this calculation
-   * @returns Distance in Meters
+   * @param el2 end altitude in meters, use 0.0 to leave out this calculation
+   * @returns distance in meters
   */
   public static double distance(double lat1, double lon1, double el1, double lat2, double lon2, double el2) {
     final int R = 6371; // approx. radius of the earth

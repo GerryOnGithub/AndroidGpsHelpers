@@ -15,14 +15,13 @@ import com.google.android.gms.location.LocationServices;
 
 // Based on https://developer.android.com/training/location/receive-location-updates.html
 public class GpsWrapper extends Observable implements ConnectionCallbacks, OnConnectionFailedListener, LocationListener {
-  private static final String TAG = "gerry.GPS";
+  private static final String TAG = "ca.gerry.gps";
 
   protected GoogleApiClient mGoogleApiClient;
   protected LocationRequest mLocationRequest;
   protected Location lastLocation;
-
-  public int updateInterval = 1000 * 20;
-  public int fastestUpdateInterval = 1000 * 10;
+  protected int updateInterval;
+  protected int fastestUpdateInterval;
 
   public GpsWrapper(Context context, int updateIntervalMs, int fastestUpdateIntervalMs) {
     super();
@@ -85,6 +84,13 @@ public class GpsWrapper extends Observable implements ConnectionCallbacks, OnCon
     // The final argument to {@code requestLocationUpdates()} is a LocationListener
     // (http://developer.android.com/reference/com/google/android/gms/location/LocationListener.html).
     LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+  }
+
+  /**
+   @return last (acceptable) location, which could be null
+   */
+  public Location location() {
+    return lastLocation;
   }
 
   @Override // ConnectionCallbacks
