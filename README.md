@@ -5,7 +5,7 @@ Update your AndroidManifest.xml permissions:
 
 ```<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />```
 
-Initialize the GPS Wrapper class, add an observer and you got GPS. 
+Create one object of the GPS Wrapper class, add an observer (addObserver) and you got GPS. 
 
 Because your app can get bombarded with locations, this package includes some  configurable code to get that under control using a couple of filtering strategies. Some of the strategies are based on Google's code, but I have also added a distance calculation (why bother reporting the same position?). In the future I will be adding a change-in-heading strategy. When the heading is changing (think of a car for example) capturing more GPS points maps much nicer. 
 
